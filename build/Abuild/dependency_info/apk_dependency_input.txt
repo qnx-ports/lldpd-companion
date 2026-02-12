@@ -1,3 +1,0 @@
-abuild
-qnx-packaging
-
