@@ -7,4 +7,3 @@ self-hosted = true
 type = "extra"
 build-arch = "x86_64"
 image-version = "2025-12-08"
-
