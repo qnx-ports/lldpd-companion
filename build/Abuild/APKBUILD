@@ -17,8 +17,8 @@ subpackages="
 	"
 pkgusers="lldpd"
 pkggroups="lldpd"
-source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver-001.tar.gz"
-builddir="$srcdir/$pkgname-qnx-$pkgver-001"
+source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver-1.tar.gz"
+builddir="$srcdir/$pkgname-qnx-$pkgver-1"
 
 prepare() {
 	# this should be shipped with the release tarball
