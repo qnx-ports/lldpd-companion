@@ -52,3 +52,5 @@ jansson-dev=2.14.1-r0
 libxcrypt-dev=4.4.38-r1
 perl-dev=5.40.2-r3
 readline-dev=8.3.001-r0
+check=0.15.2-r0
+check-dev=0.15.2-r0

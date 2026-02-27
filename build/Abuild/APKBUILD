@@ -9,7 +9,7 @@ arch="all"
 license="ISC"
 makedepends="autoconf automake libtool 
 	libevent-dev libxml2-dev jansson-dev
-	perl-dev readline-dev"
+	perl-dev readline-dev check check-dev"
 subpackages="
 	$pkgname-dev
 	$pkgname-doc
@@ -41,9 +41,9 @@ build() {
 	make
 }
 
-#check() {
-	#make check
-#}
+check() {
+	make check
+}
 
 package() {
 	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
