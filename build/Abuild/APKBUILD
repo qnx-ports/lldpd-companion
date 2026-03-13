@@ -2,7 +2,7 @@
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=lldpd
 pkgver=1.0.19
-pkgrel=0
+pkgrel=${pkgrel:-0}
 pkgdesc="Implementation of IEEE 802.1ab"
 url="https://lldpd.github.io/"
 arch="all"
@@ -52,6 +52,7 @@ package() {
 
 
 
+options="$options ${DISABLE_CHECK:+!check}"
 sha512sums="
 e71256fc023746e88bf808442767a1425758e424e9c5c88828afb0bcb750053aaf48f36940f048aef21860408d7f073aed45878bc17581807482b9d89c2da779  lldpd-1.0.19.tar.gz
 "
