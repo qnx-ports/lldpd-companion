@@ -1,7 +1,7 @@
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=lldpd
-pkgver=1.0.19
+pkgver=1.0.19_p0
 pkgrel=0
 pkgdesc="Implementation of IEEE 802.1ab"
 url="https://lldpd.github.io/"
@@ -17,8 +17,8 @@ subpackages="
 	"
 pkgusers="lldpd"
 pkggroups="lldpd"
-source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver-p0.tar.gz"
-builddir="$srcdir/$pkgname-qnx-$pkgver-p0"
+source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-qnx-$pkgver"
 
 prepare() {
 	# this should be shipped with the release tarball
@@ -51,5 +51,5 @@ package() {
 }
 
 sha512sums="
-2931fb266e17c5bfc337e43e07e131136f98ca9db1ef33bf0db88d0b139af08d40d37e43a9268a802e5de55651d3644ab4010d52bfc99c895ecd8cf5a78e1cee  lldpd-1.0.19.tar.gz
+0fa516712e8c91641c60ecd93b6b9763c730d19ef20f4ffcbf133c4f358eeb08de1a11bbfb67ebf44df9f4a70508db3f285367acf460de0c3fa1ffb56a8560be  lldpd-1.0.19_p0.tar.gz
 "
