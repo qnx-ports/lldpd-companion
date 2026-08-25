@@ -1,5 +1,6 @@
-# Contributor: Francesco Colista <fcolista@alpinelinux.org>
-# Maintainer: Francesco Colista <fcolista@alpinelinux.org>
+# Alpine-Contributor: Francesco Colista <fcolista@alpinelinux.org>
+# Alpine-Maintainer: Francesco Colista <fcolista@alpinelinux.org>
+# Maintainer: Marcin Sochacki <msochacki@qnx.com>
 pkgname=lldpd
 pkgver=1.0.19_p0
 pkgrel=0
@@ -9,15 +10,19 @@ arch="all"
 license="ISC"
 makedepends="autoconf automake libtool 
 	libevent-dev libxml2-dev jansson-dev
-	perl-dev readline-dev check check-dev"
+	perl-dev readline-dev"
+checkdepends="check check-dev"
+install="$pkgname.post-install"
 subpackages="
 	$pkgname-dev
 	$pkgname-doc
 	$pkgname-bash-completion
+	$pkgname-zsh-completion
 	"
 pkgusers="lldpd"
 pkggroups="lldpd"
-source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver.tar.gz"
+source="$pkgname-$pkgver.tar.gz::https://github.com/qnx-ports/lldpd/archive/refs/tags/qnx-$pkgver.tar.gz
+	lldpd.initd"
 builddir="$srcdir/$pkgname-qnx-$pkgver"
 
 prepare() {
@@ -31,13 +36,19 @@ build() {
 
 	export LDFLAGS="$LDFLAGS -lsocket -lregex"
 	./configure \
-		--host=x86_64-x86pc-nto-qnx8.0.0 \
-		--build=x86_64-x86pc-nto-qnx8.0.0 \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--sbindir=/usr/bin \
 		--prefix=/usr \
 		--localstatedir=/var \
 		--sysconfdir=/etc \
 		--enable-static=no \
-		--enable-min-macro
+		--enable-min-macro \
+		--with-privsep-user=lldpd \
+		--with-privsep-group=lldpd \
+		--with-privsep-chroot=/var/empty \
+		--with-lldpd-ctl-socket=/run/$pkgname/$pkgname.socket \
+		--with-lldpd-pid-file=/run/$pkgname/$pkgname.pid
 	make
 }
 
@@ -46,10 +57,14 @@ check() {
 }
 
 package() {
+	install -d "$pkgdir"/var/empty
+	install -Dm755 "$srcdir"/$pkgname.initd "$pkgdir/etc/init.d/$pkgname"
 	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 	make DESTDIR="$pkgdir" install
 }
 
+
 sha512sums="
 0fa516712e8c91641c60ecd93b6b9763c730d19ef20f4ffcbf133c4f358eeb08de1a11bbfb67ebf44df9f4a70508db3f285367acf460de0c3fa1ffb56a8560be  lldpd-1.0.19_p0.tar.gz
+8bdc5710e7ec44160966afea4696113bf7d87d59d8fdf9f782a370aaa7f6bdcc3f9a31bb4a053a0d54a6365c08f69e2a5bfe05d873e46a91b01c886727ba1b40  lldpd.initd
 "
